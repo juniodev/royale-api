@@ -1,6 +1,9 @@
 const router = require('express').Router()
 const cheerio = require('cheerio')
 const axios = require('axios')
+
+const { findDecksClan } = require('../controllers/find-decks-clan.js')
+
 const { z } = require('zod')
 
 const url = 'https://royaleapi.com/clan/'
@@ -10,6 +13,8 @@ const schema = z.object({
 		required_error: 'tag is not empty'
 	}).trim()
 })
+
+router.get('/clan/decks/:tag', findDecksClan)
 
 router.get('/clan/details/:tag', async (req, res) => {
 	
